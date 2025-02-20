@@ -1,6 +1,6 @@
 function EquipmentPage() {
   return (
-    <div>
+    <div className="hidden md:flex">
       <h1>Equipment Page</h1>
     </div>
   );
