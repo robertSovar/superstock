@@ -8,7 +8,7 @@ function DashboardPage() {
   return (
     <div className="flex h-screen ">
       <aside className="w-screen h-screen flex justify-center items-center text-center text-sm md:w-[195px] md:justify-start md:text-xl ">
-        <ul className="flex flex-col gap-16 shrink md:flex-col md:gap-16  md:pt-6 md:px-6 md:h-full md:w-30 md:bg-customGray md:min-h-screen ">
+        <ul className="flex flex-col gap-16 shrink md:flex-col md:gap-16  md:pt-6 md:px-6 md:h-full md:w-30 md:bg-customGreen md:min-h-screen ">
           <Link to="/equipments">
             <li className="flex gap-2 items-center cursor-pointer">
               {<CiBoxList />}
