@@ -3,8 +3,13 @@ type Props = React.DetailedHTMLProps<
   HTMLButtonElement
 > & {};
 
-const Button = (props: Props) => {
-  return <button {...props} className=" bg-customGreen p-[8px] rounded-md" />;
+const Button = ({ className, ...props }: Props) => {
+  return (
+    <button
+      {...props}
+      className={`bg-customGreen p-[8px] rounded-md ${className}`}
+    />
+  );
 };
 
 export default Button;
