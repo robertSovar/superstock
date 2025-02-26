@@ -6,3 +6,8 @@ export const fetchEquipments = async () => {
   const response = await axios.get(`${API_BASE_URL}/equipment`);
   return response.data;
 };
+
+export const addEquipment = async () => {
+  const response = await axios.post(`${API_BASE_URL}/equipment`);
+  return response.data;
+};

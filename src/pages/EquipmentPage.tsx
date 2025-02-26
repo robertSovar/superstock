@@ -3,6 +3,7 @@ import { fetchEquipments } from "../services/api";
 import { HiMagnifyingGlass } from "react-icons/hi2";
 import Button from "../utils/Button/Button";
 import filterData from "../utils/Functions/filter";
+import Modal from "../utils/Modal/Modal";
 
 function EquipmentPage() {
   interface Equipments {
@@ -15,6 +16,7 @@ function EquipmentPage() {
 
   const [equipments, setEquipments] = useState<Equipments[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     fetchEquipments()
@@ -63,7 +65,18 @@ function EquipmentPage() {
           <p>No equipment found.</p>
         )}
       </div>
-      <Button className="w-[50px]">+</Button>
+      <Button onClick={() => setIsModalOpen(true)} className="w-[50px]">
+        +
+      </Button>
+
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <h2 className="text-xl font-bold">Add Equipment</h2>
+        <p className="mt-2"> Enter the details of the new equipment:</p>
+        <div className="flex flex-col">
+          <input type="text" placeholder="Equipment name" />
+          <Button onClick={() => setIsModalOpen(false)}>Add equipment</Button>
+        </div>
+      </Modal>
     </div>
   );
 }
