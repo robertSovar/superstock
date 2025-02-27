@@ -1,15 +1,7 @@
 import Button from "../Button/Button";
-import { useForm } from "react-hook-form";
 import { useState } from "react";
 
-type FormFields = {
-  name: string;
-  quantity: number;
-  type: string;
-};
-
 const EquipmentForm = () => {
-  const form = useForm();
   const [selectedType, setSelectedType] = useState<string>(
     "Echipament terminal"
   );
