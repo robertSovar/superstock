@@ -4,6 +4,7 @@ import { HiMagnifyingGlass } from "react-icons/hi2";
 import Button from "../utils/Button/Button";
 import filterData from "../utils/Functions/filter";
 import Modal from "../utils/Modal/Modal";
+import EquipmentForm from "../utils/Forms/EquipmentForm";
 
 function EquipmentPage() {
   interface Equipments {
@@ -12,6 +13,8 @@ function EquipmentPage() {
     quantity: number;
     type: string;
     addedDate: string;
+    status: string;
+    purchasedDate: string;
   }
 
   const [equipments, setEquipments] = useState<Equipments[]>([]);
@@ -59,6 +62,8 @@ function EquipmentPage() {
               <span>
                 Added Date: {new Date(equipment.addedDate).toLocaleDateString()}
               </span>
+              <br />
+              <span>Status: {equipment.status}</span>
             </div>
           ))
         ) : (
@@ -70,12 +75,7 @@ function EquipmentPage() {
       </Button>
 
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <h2 className="text-xl font-bold">Add Equipment</h2>
-        <p className="mt-2"> Enter the details of the new equipment:</p>
-        <div className="flex flex-col">
-          <input type="text" placeholder="Equipment name" />
-          <Button onClick={() => setIsModalOpen(false)}>Add equipment</Button>
-        </div>
+        <EquipmentForm />
       </Modal>
     </div>
   );

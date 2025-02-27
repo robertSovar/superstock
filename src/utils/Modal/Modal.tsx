@@ -16,7 +16,7 @@ const Modal = ({ isOpen, onClose, children }: ModalProps) => {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="bg-white p-6 rounded-lg shadow-lg w-[400px] relative"
+        className="bg-white p-6 rounded-lg shadow-lg relative"
       >
         <button
           onClick={onClose}
