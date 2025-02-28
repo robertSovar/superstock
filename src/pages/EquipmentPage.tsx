@@ -30,6 +30,7 @@ function EquipmentPage() {
   }, []);
 
   const filteredEquipments = filterData(equipments, "name", searchTerm);
+
   return (
     <div className="hidden md:flex flex-col gap-[20px] p-10">
       <h1>Equipment Page</h1>
