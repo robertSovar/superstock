@@ -1,11 +1,15 @@
-import Button from "../Button/Button";
+import Button from "../../utils/Button/Button";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { addEquipment } from "../../services/api";
 
 type FormFields = {
   name: string;
   quantity: number;
   type: string;
+  image?: string;
+  status: string;
+  purchaseDate: string;
 };
 
 const EquipmentForm = () => {
@@ -16,11 +20,14 @@ const EquipmentForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
+    reset,
   } = useForm<FormFields>();
 
-  const onSubmit: SubmitHandler<FormFields> = (data) => {
+  const onSubmit: SubmitHandler<FormFields> = async (data) => {
+    await addEquipment(data);
     console.log(data);
+    reset();
   };
 
   return (
@@ -63,7 +70,9 @@ const EquipmentForm = () => {
           )
         )}
       </div>
-      <Button>Add Equipment</Button>
+      <Button disabled={isSubmitting}>
+        {isSubmitting ? "Loading..." : "Add Equipment"}
+      </Button>
     </form>
   );
 };

@@ -4,7 +4,7 @@ import { HiMagnifyingGlass } from "react-icons/hi2";
 import Button from "../utils/Button/Button";
 import filterData from "../utils/Functions/filter";
 import Modal from "../utils/Modal/Modal";
-import EquipmentForm from "../utils/Forms/EquipmentForm";
+import EquipmentForm from "../components/Forms/EquipmentForm";
 
 function EquipmentPage() {
   interface Equipments {
@@ -61,7 +61,8 @@ function EquipmentPage() {
               <span>Type: {equipment.type}</span>
               <br />
               <span>
-                Added Date: {new Date(equipment.addedDate).toLocaleDateString()}
+                Added Date:{" "}
+                {new Date(Number(equipment.addedDate)).toLocaleDateString()}
               </span>
               <br />
               <span>Status: {equipment.status}</span>
