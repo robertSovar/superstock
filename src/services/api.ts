@@ -20,3 +20,14 @@ export const addEquipment = async (data: EquipmentData) => {
   const response = await axios.post(`${API_BASE_URL}/equipment`, data);
   return response.data;
 };
+
+export const editEquipments = async (
+  id: number,
+  updatedData: EquipmentData
+) => {
+  const response = await axios.put(
+    `${API_BASE_URL}/equipment/${id}`,
+    updatedData
+  );
+  return response.data;
+};
