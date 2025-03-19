@@ -5,10 +5,12 @@ import Button from "../utils/Button/Button";
 import filterData from "../utils/Functions/filter";
 import Modal from "../utils/Modal/Modal";
 import EquipmentForm from "../components/Forms/EquipmentForm";
+import { HiOutlineDotsVertical } from "react-icons/hi";
+import EditCardDropdown from "../components/EditCardDropdown/EditCardDropdown";
 
 function EquipmentPage() {
   interface Equipments {
-    id: number;
+    _id: number;
     name: string;
     quantity: number;
     type: string;
@@ -20,6 +22,11 @@ function EquipmentPage() {
   const [equipments, setEquipments] = useState<Equipments[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [cardDropdownId, setCardDropdownId] = useState<number | null>(null);
+
+  const toogleDropdown = (id: number) => {
+    setCardDropdownId(cardDropdownId === id ? null : id);
+  };
 
   useEffect(() => {
     fetchEquipments()
@@ -52,8 +59,16 @@ function EquipmentPage() {
           filteredEquipments.map((equipment, index) => (
             <div
               key={index}
-              className="w-[300px] h-[160px] border p-4 mb-2 rounded bg-gray-100"
+              className="w-[300px] h-auto border pb-4 pt-12 pr-4 pl-4 mb-2 rounded bg-gray-100 relative"
             >
+              <button
+                className="absolute top-[8px] right-[8px]"
+                onClick={() => toogleDropdown(equipment._id)}
+              >
+                <HiOutlineDotsVertical />
+                {cardDropdownId === equipment._id && <EditCardDropdown />}
+              </button>
+
               <span>Name: {equipment.name}</span>
               <br />
               <span>Quantity: {equipment.quantity}</span>
