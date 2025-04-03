@@ -12,7 +12,11 @@ type FormFields = {
   purchaseDate: string;
 };
 
-const EquipmentForm = () => {
+interface EquipmentFormProps {
+  onAddEqupiment: () => void;
+}
+
+const EquipmentForm: React.FC<EquipmentFormProps> = ({ onAddEqupiment }) => {
   const [selectedType, setSelectedType] = useState<string>(
     "Echipament terminal"
   );
@@ -26,6 +30,7 @@ const EquipmentForm = () => {
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
     await addEquipment(data);
+    onAddEqupiment();
     console.log(data);
     reset();
   };

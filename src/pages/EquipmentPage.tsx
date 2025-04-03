@@ -28,6 +28,15 @@ function EquipmentPage() {
     setCardDropdownId(cardDropdownId === id ? null : id);
   };
 
+  const handleAddEquipment = () => {
+    setIsModalOpen(false);
+    fetchEquipments()
+      .then((data) => setEquipments(data))
+      .catch((error) =>
+        console.error("There was an error in fetching your data", error)
+      );
+  };
+
   useEffect(() => {
     fetchEquipments()
       .then((data) => setEquipments(data))
@@ -92,7 +101,7 @@ function EquipmentPage() {
       </Button>
 
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <EquipmentForm />
+        <EquipmentForm onAddEqupiment={handleAddEquipment} />
       </Modal>
     </div>
   );
