@@ -1,9 +1,5 @@
 const EditEquipmentForm = () => {
-  return (
-    <div>
-      <h1>EditEquipmentForm</h1>
-    </div>
-  );
+  return <h1>This will be my equipment form</h1>;
 };
 
 export default EditEquipmentForm;

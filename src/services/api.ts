@@ -31,3 +31,8 @@ export const editEquipments = async (
   );
   return response.data;
 };
+
+export const deleteEquipment = async (_id: number) => {
+  const response = await axios.delete(`${API_BASE_URL}/equipment/${_id}`);
+  return response.data;
+};
