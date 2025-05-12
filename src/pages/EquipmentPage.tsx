@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchEquipments } from "../services/api";
+import { deleteEquipment, fetchEquipments } from "../services/api";
 import { HiMagnifyingGlass } from "react-icons/hi2";
 import Button from "../utils/Button/Button";
 import filterData from "../utils/Functions/filter";
@@ -35,6 +35,15 @@ function EquipmentPage() {
       .catch((error) =>
         console.error("There was an error in fetching your data", error)
       );
+  };
+
+  const handleDelete = async (id: number) => {
+    try {
+      await deleteEquipment(id);
+      setEquipments((prev) => prev.filter((eq) => eq._id !== id));
+    } catch (error) {
+      console.error("There was an error in deleting your data", error);
+    }
   };
 
   useEffect(() => {
@@ -75,7 +84,12 @@ function EquipmentPage() {
                 onClick={() => toogleDropdown(equipment._id)}
               >
                 <HiOutlineDotsVertical />
-                {cardDropdownId === equipment._id && <EditCardDropdown />}
+                {cardDropdownId === equipment._id && (
+                  <EditCardDropdown
+                    equipment={equipment}
+                    onDelete={handleDelete}
+                  />
+                )}
               </button>
 
               <span>Name: {equipment.name}</span>
