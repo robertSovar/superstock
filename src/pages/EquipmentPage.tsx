@@ -7,7 +7,6 @@ import Modal from "../utils/Modal/Modal";
 import EquipmentForm from "../components/Forms/EquipmentForm";
 import { HiOutlineDotsVertical } from "react-icons/hi";
 import EditCardDropdown from "../components/EditCardDropdown/EditCardDropdown";
-
 function EquipmentPage() {
   interface Equipments {
     _id: string;
@@ -79,7 +78,7 @@ function EquipmentPage() {
               key={index}
               className="w-[300px] h-auto border pb-4 pt-12 pr-4 pl-4 mb-2 rounded bg-gray-100 relative"
             >
-              <button
+              <div
                 className="absolute top-[8px] right-[8px]"
                 onClick={() => toogleDropdown(equipment._id)}
               >
@@ -90,7 +89,7 @@ function EquipmentPage() {
                     onDelete={handleDelete}
                   />
                 )}
-              </button>
+              </div>
 
               <span>Name: {equipment.name}</span>
               <br />

@@ -43,7 +43,11 @@ const EditCardDropdown = ({
 
       {isOpen && (
         <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
-          <EditEquipmentForm />
+          <EditEquipmentForm
+            equipment={equipment}
+            onClose={() => setIsOpen(false)}
+            onUpdate={() => setIsOpen(false)}
+          />
         </Modal>
       )}
     </>
