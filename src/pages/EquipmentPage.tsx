@@ -10,7 +10,7 @@ import EditCardDropdown from "../components/EditCardDropdown/EditCardDropdown";
 
 function EquipmentPage() {
   interface Equipments {
-    _id: number;
+    _id: string;
     name: string;
     quantity: number;
     type: string;
@@ -22,9 +22,9 @@ function EquipmentPage() {
   const [equipments, setEquipments] = useState<Equipments[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [cardDropdownId, setCardDropdownId] = useState<number | null>(null);
+  const [cardDropdownId, setCardDropdownId] = useState<string | null>(null);
 
-  const toogleDropdown = (id: number) => {
+  const toogleDropdown = (id: string) => {
     setCardDropdownId(cardDropdownId === id ? null : id);
   };
 
@@ -37,7 +37,7 @@ function EquipmentPage() {
       );
   };
 
-  const handleDelete = async (id: number) => {
+  const handleDelete = async (id: string) => {
     try {
       await deleteEquipment(id);
       setEquipments((prev) => prev.filter((eq) => eq._id !== id));

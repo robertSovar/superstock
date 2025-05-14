@@ -3,7 +3,7 @@ import EditEquipmentForm from "../Forms/EditEquipmentForm";
 import { useState } from "react";
 
 interface Equipments {
-  _id: number;
+  _id: string;
   name: string;
   quantity: number;
   type: string;
@@ -17,7 +17,7 @@ const EditCardDropdown = ({
   onDelete,
 }: {
   equipment: Equipments;
-  onDelete: (id: number) => void;
+  onDelete: (id: string) => void;
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 

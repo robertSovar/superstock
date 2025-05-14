@@ -22,7 +22,7 @@ export const addEquipment = async (data: EquipmentData) => {
 };
 
 export const editEquipments = async (
-  id: number,
+  id: string,
   updatedData: EquipmentData
 ) => {
   const response = await axios.put(
@@ -32,7 +32,7 @@ export const editEquipments = async (
   return response.data;
 };
 
-export const deleteEquipment = async (_id: number) => {
+export const deleteEquipment = async (_id: string) => {
   const response = await axios.delete(`${API_BASE_URL}/equipment/${_id}`);
   return response.data;
 };
