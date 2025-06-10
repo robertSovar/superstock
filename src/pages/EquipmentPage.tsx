@@ -9,7 +9,6 @@ import { HiOutlineDotsVertical } from "react-icons/hi";
 import EditCardDropdown from "../components/EditCardDropdown/EditCardDropdown";
 import Equipments from "../utils/EquipmentsInterface/Equipments";
 
-
 function EquipmentPage() {
   const [equipments, setEquipments] = useState<Equipments[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -20,7 +19,7 @@ function EquipmentPage() {
     setCardDropdownId(cardDropdownId === id ? null : id);
   };
 
-  const handleAddEquipment = () => {
+  const refreshEquipements = () => {
     setIsModalOpen(false);
     fetchEquipments()
       .then((data) => setEquipments(data))
@@ -80,6 +79,7 @@ function EquipmentPage() {
                   <EditCardDropdown
                     equipment={equipment}
                     onDelete={handleDelete}
+                    onUpdate={refreshEquipements}
                   />
                 )}
               </div>
@@ -107,7 +107,7 @@ function EquipmentPage() {
       </Button>
 
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <EquipmentForm onAddEqupiment={handleAddEquipment} />
+        <EquipmentForm onAddEqupiment={refreshEquipements} />
       </Modal>
     </div>
   );

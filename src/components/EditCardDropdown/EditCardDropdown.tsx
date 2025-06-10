@@ -6,9 +6,11 @@ import Equipments from "../../utils/EquipmentsInterface/Equipments";
 const EditCardDropdown = ({
   equipment,
   onDelete,
+  onUpdate,
 }: {
   equipment: Equipments;
   onDelete: (id: string) => void;
+  onUpdate: () => void;
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -41,7 +43,7 @@ const EditCardDropdown = ({
           <EditEquipmentForm
             equipment={equipment}
             onClose={() => setIsOpen(false)}
-            onUpdate={() => setIsOpen(false)}
+            onUpdate={onUpdate}
           />
         </Modal>
       )}
