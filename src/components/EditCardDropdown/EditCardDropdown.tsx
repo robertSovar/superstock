@@ -1,16 +1,7 @@
 import Modal from "../../utils/Modal/Modal";
 import EditEquipmentForm from "../Forms/EditEquipmentForm";
 import { useState } from "react";
-
-interface Equipments {
-  _id: string;
-  name: string;
-  quantity: number;
-  type: string;
-  addedDate: string;
-  status: string;
-  purchasedDate: string;
-}
+import Equipments from "../../utils/EquipmentsInterface/Equipments";
 
 const EditCardDropdown = ({
   equipment,
@@ -36,8 +27,12 @@ const EditCardDropdown = ({
     <>
       <div className="flex flex-col absolute right-[2px] ">
         <div className="flex flex-col gap-1  text-xs">
-          <span onClick={handleEditClick}>Edit</span>
-          <span onClick={handleDeleteClick}>Delete</span>
+          <span onClick={handleEditClick} className="cursor-pointer">
+            Edit
+          </span>
+          <span onClick={handleDeleteClick} className="cursor-pointer">
+            Delete
+          </span>
         </div>
       </div>
 

@@ -7,17 +7,10 @@ import Modal from "../utils/Modal/Modal";
 import EquipmentForm from "../components/Forms/EquipmentForm";
 import { HiOutlineDotsVertical } from "react-icons/hi";
 import EditCardDropdown from "../components/EditCardDropdown/EditCardDropdown";
-function EquipmentPage() {
-  interface Equipments {
-    _id: string;
-    name: string;
-    quantity: number;
-    type: string;
-    addedDate: string;
-    status: string;
-    purchasedDate: string;
-  }
+import Equipments from "../utils/EquipmentsInterface/Equipments";
 
+
+function EquipmentPage() {
   const [equipments, setEquipments] = useState<Equipments[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
