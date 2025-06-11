@@ -8,14 +8,16 @@ import EquipmentForm from "../components/Forms/EquipmentForm";
 import { HiOutlineDotsVertical } from "react-icons/hi";
 import EditCardDropdown from "../components/EditCardDropdown/EditCardDropdown";
 import Equipments from "../utils/EquipmentsInterface/Equipments";
+import EditEquipmentForm from "../components/Forms/EditEquipmentForm";
 
 function EquipmentPage() {
   const [equipments, setEquipments] = useState<Equipments[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [cardDropdownId, setCardDropdownId] = useState<string | null>(null);
+  const [editEquipment, setEditEquipment] = useState<Equipments | null>(null);
 
-  const toogleDropdown = (id: string) => {
+  const toggleDropdown = (id: string) => {
     setCardDropdownId(cardDropdownId === id ? null : id);
   };
 
@@ -48,7 +50,7 @@ function EquipmentPage() {
   const filteredEquipments = filterData(equipments, "name", searchTerm);
 
   return (
-    <div className="hidden md:flex flex-col gap-[20px] p-10">
+    <div className="md:flex flex-col gap-[20px] p-10">
       <h1>Equipment Page</h1>
       <span className="flex items-center gap-[4px]">
         <input
@@ -65,25 +67,28 @@ function EquipmentPage() {
 
       <div className="flex flex-wrap gap-8">
         {filteredEquipments.length > 0 ? (
-          filteredEquipments.map((equipment, index) => (
+          filteredEquipments.map((equipment) => (
             <div
-              key={index}
+              key={equipment._id}
               className="w-[300px] h-auto border pb-4 pt-12 pr-4 pl-4 mb-2 rounded bg-gray-100 relative"
             >
               <div
                 className="absolute top-[8px] right-[8px]"
-                onClick={() => toogleDropdown(equipment._id)}
+                onClick={() => toggleDropdown(equipment._id)}
               >
                 <HiOutlineDotsVertical />
                 {cardDropdownId === equipment._id && (
                   <EditCardDropdown
                     equipment={equipment}
                     onDelete={handleDelete}
-                    onUpdate={refreshEquipements}
+                    onClose={() => setCardDropdownId(null)}
+                    onEdit={() => {
+                      setEditEquipment(equipment);
+                      setCardDropdownId(null);
+                    }}
                   />
                 )}
               </div>
-
               <span>Name: {equipment.name}</span>
               <br />
               <span>Quantity: {equipment.quantity}</span>
@@ -102,6 +107,7 @@ function EquipmentPage() {
           <p>No equipment found.</p>
         )}
       </div>
+
       <Button onClick={() => setIsModalOpen(true)} className="w-[50px]">
         +
       </Button>
@@ -109,6 +115,19 @@ function EquipmentPage() {
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <EquipmentForm onAddEqupiment={refreshEquipements} />
       </Modal>
+
+      {editEquipment && (
+        <Modal isOpen={true} onClose={() => setEditEquipment(null)}>
+          <EditEquipmentForm
+            equipment={editEquipment}
+            onClose={() => setEditEquipment(null)}
+            onUpdate={() => {
+              refreshEquipements();
+              setEditEquipment(null);
+            }}
+          />
+        </Modal>
+      )}
     </div>
   );
 }

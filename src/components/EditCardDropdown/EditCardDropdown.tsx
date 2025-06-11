@@ -1,53 +1,45 @@
-import Modal from "../../utils/Modal/Modal";
-import EditEquipmentForm from "../Forms/EditEquipmentForm";
-import { useState } from "react";
+import { useClickOutside } from "../../utils/UseClickOutsideHook/UseClickOutsideHook";
 import Equipments from "../../utils/EquipmentsInterface/Equipments";
 
 const EditCardDropdown = ({
   equipment,
   onDelete,
-  onUpdate,
+  onEdit,
+  onClose,
 }: {
   equipment: Equipments;
   onDelete: (id: string) => void;
-  onUpdate: () => void;
+  onEdit: () => void;
+  onClose: () => void;
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const ref = useClickOutside<HTMLDivElement>(() => {
+    onClose();
+  });
 
   const handleEditClick = (e: React.MouseEvent) => {
     e.stopPropagation();
-    setIsOpen(true);
+    onEdit();
   };
 
-  const handleDeleteClick = async (e: React.MouseEvent) => {
+  const handleDeleteClick = (e: React.MouseEvent) => {
     e.stopPropagation();
-
     onDelete(equipment._id);
   };
 
   return (
-    <>
-      <div className="flex flex-col absolute right-[2px] ">
-        <div className="flex flex-col gap-1  text-xs">
-          <span onClick={handleEditClick} className="cursor-pointer">
-            Edit
-          </span>
-          <span onClick={handleDeleteClick} className="cursor-pointer">
-            Delete
-          </span>
-        </div>
+    <div
+      ref={ref}
+      className="flex flex-col absolute right-[2px] bg-white p-2 rounded shadow z-50"
+    >
+      <div className="flex flex-col gap-1 text-xs">
+        <span onClick={handleEditClick} className="cursor-pointer">
+          Edit
+        </span>
+        <span onClick={handleDeleteClick} className="cursor-pointer">
+          Delete
+        </span>
       </div>
-
-      {isOpen && (
-        <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
-          <EditEquipmentForm
-            equipment={equipment}
-            onClose={() => setIsOpen(false)}
-            onUpdate={onUpdate}
-          />
-        </Modal>
-      )}
-    </>
+    </div>
   );
 };
 
