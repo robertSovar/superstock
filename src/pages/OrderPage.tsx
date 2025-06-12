@@ -1,7 +1,7 @@
 function OrderPage() {
   return (
-    <div className=" md:flex">
-      <h1 className="flex justify-center items-center text-2xl">Order Page</h1>
+    <div className=" flex flex-col gap-[20px] p-10">
+      <h1>Order Page</h1>
     </div>
   );
 }
